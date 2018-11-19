@@ -1,0 +1,35 @@
+* {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+body {
+	background-color: #ebccd4;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+h1 {
+	margin-top: 8em;
+}
+
+.buttons {
+	margin-top: 3em;
+}
+
+button {
+	background-color: #ebccd4;
+	border: 2px solid black;
+	color: black;
+	padding: 0.5em;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 2em;
+}
+
+button:hover {
+	transition: 0.8s;
+	background-color: lightgrey;
+}
