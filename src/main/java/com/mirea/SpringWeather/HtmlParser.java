@@ -10,4 +10,6 @@ public interface HtmlParser {
     float findWindSpeed();
 
     int findHumidity();
+
+    Weather getWeather(String city);
 }

@@ -63,9 +63,8 @@ public class YandexParser implements HtmlParser {
     }
 
     public Weather getWeather(String city) {
-        this.doc = parseDoc(city);
-        return new Weather(findWindSpeed(), findTemperature(), findHumidity());
-
+        this.doc = parseDoc("https://yandex.ru/pogoda/" + city);
+        return new Weather("YandexWeather", findWindSpeed(), findTemperature(), findHumidity());
     }
 
 }
