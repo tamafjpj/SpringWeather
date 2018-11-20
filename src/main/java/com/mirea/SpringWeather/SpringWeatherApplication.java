@@ -6,10 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringWeatherApplication {
 
     public static void main(String[] args) {
-
-        //SpringApplication.run(SpringWeatherApplication.class, args);
-        AccuParser yp = new AccuParser();
-        Weather w = yp.getWeather("saint-petersburg");
+        MsnParser test = new MsnParser();
+        Weather w = test.getWeather("moscow");
         System.out.println(w.source);
         System.out.println(w.temp);
         System.out.println(w.humidity);
