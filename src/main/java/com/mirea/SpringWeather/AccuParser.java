@@ -1,5 +1,6 @@
 package com.mirea.SpringWeather;
 
+import model.Weather;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,6 +13,7 @@ public class AccuParser implements HtmlParser {
 
     public Document parseDoc(String url) {
         Document doc = null;
+
         try {
             doc = Jsoup.connect(url).get();
         } catch (java.io.IOException IOException) {
@@ -24,6 +26,7 @@ public class AccuParser implements HtmlParser {
     public int findTemperature() {
         String s = "0";
         Elements content = doc.getElementsByClass("large-temp");
+
         for (Element i : content) {
             s = i.text();
             break;
@@ -47,7 +50,6 @@ public class AccuParser implements HtmlParser {
             k++;
             if (k == 2) {
                 s = i.text();
-                System.out.println(s);
                 s = s.substring(s.indexOf("Влажность:") + 11, s.indexOf("%"));
             }
         }

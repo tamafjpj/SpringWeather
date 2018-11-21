@@ -1,17 +1,15 @@
 package com.mirea.SpringWeather;
 
+import model.Weather;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
 public class YandexParser implements HtmlParser {
     private Document doc;
-
 
     public Document parseDoc(String url) {
         Document doc = null;
