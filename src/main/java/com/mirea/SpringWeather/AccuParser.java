@@ -70,7 +70,7 @@ public class AccuParser implements HtmlParser {
             }
         }
         s = s.replaceAll(",", ".");
-        return Float.parseFloat(s);
+        return (float)(Math.round(Float.parseFloat(s) / (float)3.6));
     }
 
     @Override
