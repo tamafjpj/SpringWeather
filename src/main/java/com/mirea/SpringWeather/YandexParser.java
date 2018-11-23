@@ -8,8 +8,15 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 @Component
-public class YandexParser implements HtmlParser {
+public class YandexParser implements HtmlParser,Runnable {
     private Document doc;
+    private String city;
+    private  Weather weather;
+
+    @Override
+    public void run() {
+        getWeather(city);
+    }
 
     public Document parseDoc(String url) {
         Document doc = null;
@@ -60,9 +67,17 @@ public class YandexParser implements HtmlParser {
         return Integer.parseInt(s);
     }
 
-    public Weather getWeather(String city) {
+    public void getWeather(String city) {
         this.doc = parseDoc("https://yandex.ru/pogoda/" + city);
-        return new Weather("YandexWeather", findWindSpeed(), findTemperature(), findHumidity());
+        this.weather = new Weather("YandexWeather", findWindSpeed(), findTemperature(), findHumidity());
     }
 
+    @Override
+    public Weather getWeather() {
+        return this.weather;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

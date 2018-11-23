@@ -8,8 +8,15 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MsnParser implements HtmlParser {
+public class MsnParser implements HtmlParser,Runnable {
     private Document doc;
+    private String city;
+    private Weather weather;
+
+    @Override
+    public void run() {
+        getWeather(city);
+    }
 
     public Document parseDoc(String url) {
         Document doc = null;
@@ -72,8 +79,8 @@ public class MsnParser implements HtmlParser {
         return Float.parseFloat(s);
     }
 
-    @Override
-    public Weather getWeather(String city) {
+   // @Override
+    public void getWeather(String city) {
         city = city.toLowerCase();
         String url;
         switch (city) {
@@ -97,6 +104,15 @@ public class MsnParser implements HtmlParser {
 
         }
         doc = parseDoc(url);
-        return new Weather("MsnWeather", findWindSpeed(), findTemperature(), findHumidity());
+        this.weather=new Weather("MsnWeather", findWindSpeed(), findTemperature(), findHumidity());
+    }
+
+    @Override
+    public Weather getWeather() {
+        return this.weather;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

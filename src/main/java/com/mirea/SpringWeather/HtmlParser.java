@@ -12,5 +12,5 @@ public interface HtmlParser {
 
     int findHumidity();
 
-    Weather getWeather(String city);
+    Weather getWeather();
 }
