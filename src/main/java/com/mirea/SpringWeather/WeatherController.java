@@ -3,10 +3,7 @@ package com.mirea.SpringWeather;
 import model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -20,8 +17,9 @@ public class WeatherController {
 
     @RequestMapping(value = "/weather/{city}", method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<Weather> getForecast(@PathVariable String city) {
-        return ws.getForecast(city);
+
+    public ArrayList<Weather> getForecast(@PathVariable String city, @RequestParam("trust") String trust) {
+        return ws.getForecast(city, trust);
     }
 
 }

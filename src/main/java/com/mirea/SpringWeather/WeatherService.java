@@ -22,8 +22,10 @@ public class WeatherService {
         this.mp = mp;
 
     }
-    public ArrayList<Weather> getForecast(String city) {
+
+    public ArrayList<Weather> getForecast(String city, String trust) {
         ArrayList<Weather> forecasts = new ArrayList<>();
+        Weather trustW = null;
         ap.setCity(city);
         yp.setCity(city);
         rp.setCity(city);
@@ -46,11 +48,77 @@ public class WeatherService {
         forecasts.add(ap.getWeather());
         forecasts.add(rp.getWeather());
         forecasts.add(mp.getWeather());
+        for (Weather i : forecasts) {
+            if (i.getSource().toLowerCase().equals(trust.toLowerCase()))
+                trustW = i;
+        }
+        forecasts.add(resolveBest(forecasts, trustW));
         return forecasts;
     }
 
-    public Weather resolveBest(ArrayList<Weather> forecasts) {
-        return null;
+    public Weather resolveBest(ArrayList<Weather> forecasts, Weather trust) {
+        ArrayList<Weather> res = new ArrayList<>();
+        ArrayList<Weather> res1 = new ArrayList<>();
+        ArrayList<Weather> res2 = new ArrayList<>();
+        int k = 0;
+        int maxc = 1;
+        for (Weather i : forecasts) {
+            for (Weather j : forecasts) {
+                if (j.getTemp() == i.getTemp()) k++;
+            }
+            res.add(i);
+            if (k > maxc) maxc = k;
+            k = 0;
+        }
+        k = 0;
+        if (res.size() > 1) {
+            for (Weather i : res) {
+                for (Weather j : res) {
+                    if (j.getTemp() == i.getTemp()) k++;
+                }
+                if (k == maxc) res1.add(i);
+                k = 0;
+            }
+        } else return res.get(0);
+        k = 0;
+        maxc = 1;
+        for (Weather i : res1) {
+            for (Weather j : res1) {
+                if (j.getHumidity() == i.getHumidity()) k++;
+            }
+            if (k > maxc) maxc = k;
+            k = 0;
+        }
+        for (Weather i : res1) {
+            for (Weather j : res1) {
+                if (j.getHumidity() == i.getHumidity()) k++;
+            }
+            if (k == maxc) res2.add(i);
+            k = 0;
+        }
+        k = 0;
+        maxc = 1;
+        for (Weather i : res2) {
+            for (Weather j : res2) {
+                if (j.getWindSpeed() == i.getWindSpeed()) k++;
+            }
+            if (k > maxc) maxc = k;
+            k = 0;
+        }
+        res.clear();
+        for (Weather i : res2) {
+            for (Weather j : res2) {
+                if (j.getWindSpeed() == i.getWindSpeed()) k++;
+            }
+            if (k == maxc) res.add(i);
+            k = 0;
+        }
+        if (res.size() > 1) {
+            for (Weather i : res) {
+                if (i.equals(trust)) return i;
+            }
+            return res.get(0);
+        }
+        return res.get(0);
     }
-
 }
