@@ -24,7 +24,7 @@
 			<h2>Выберите частоту обновления (минуты)</h2>
 			<input align="center"></input>
 			<h2>Выберите достоверный источник</h2>
-			<div class = "custom-select">
+			<div class = "custom-select2">
 				<select>
 					<option value = "0">YandexWeather</option>
 					<option value = "1">AccuWeather</option>
@@ -46,10 +46,16 @@
 		$(".custom-select select").change(function () {
 			selected_city = $(this).children("option:selected").val();
 		});
+		$(".custom-select2 select").change(function () {
+			selected_source = $(this).children("option:selected").val();
+		});
+
 
 		$("#complete").click(function () {
+			console.log(selected_city);
+			console.log(selected_source);
 			var choice = "moscow";
-			var choice_source = "Yandexweather"
+			var choice_source = "yandexweather";
 			$("#result").remove();
 			$(".weatherCity").remove();
 			switch (selected_source) {
@@ -65,7 +71,7 @@
 				
 				case '2':
 					choice_source = "";
-					choice += "rumeteo";
+					choice_source += "rumeteo";
 				break;
 
 				case '3':
@@ -109,6 +115,7 @@
 			xmlhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
 			        myObj = JSON.parse(this.responseText);
+			            console.log(choice_source);
 			            var count = 0, count2 = 0;
 			            var i;
 			            for (x in myObj) {
@@ -136,8 +143,9 @@
 			            document.getElementById("weatherList").innerHTML = txt;
 			    }
 			};
-			xmlhttp.open("GET", "http://localhost:8080/weather/"+choice+"?trust=" + choice_source +"", true);
-			xmlhttp.send();	
+			xmlhttp.open("GET", "http://localhost:8080/weather/"+choice+"?trust=" + choice_source, true);
+			console.log("http://localhost:8080/weather/"+choice+"?trust=" + choice_source +"");
+			xmlhttp.send("");	
 		});
 
 		$("#clear").click(function() {
