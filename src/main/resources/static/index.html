@@ -7,6 +7,9 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
+			<video autoplay muted loop id="myVideo">
+  				<source src="background.mp4" type="video/mp4">
+			</video>
 			<h1>SpringWeather</h1>
 			<h2>Выберите город для анализа</h2>
 			<div class = "custom-select">
@@ -23,31 +26,56 @@
 			<h2>Выберите достоверный источник</h2>
 			<div class = "custom-select">
 				<select>
-					<option value = "0">AccuWeather</option>
-					<option value = "1">Yandex Погода</option>
-					<option value = "2">Weather.com</option>
+					<option value = "0">YandexWeather</option>
+					<option value = "1">AccuWeather</option>
+					<option value = "2">RuMeteo</option>
+					<option value = "3">MsnWeather</option>
 				</select>
 			</div>
 			<div class = "buttons">
 				<button id = "clear">Очистить ввод</button>
 				<button id ="complete">Выполнить запрос</button>
 			</div>
-			<br> <br>
+			<br>
 			<div id = "weatherList"></div>
 	</body>	
 
 	<script>
-		var selected = 0;
+		var selected_city = 0;
+		var selected_source = 0;
 		$(".custom-select select").change(function () {
-			selected = $(this).children("option:selected").val();
+			selected_city = $(this).children("option:selected").val();
 		});
 
 		$("#complete").click(function () {
 			var choice = "moscow";
-			console.log(selected);
+			var choice_source = "Yandexweather"
 			$("#result").remove();
 			$(".weatherCity").remove();
-			switch (selected) {
+			switch (selected_source) {
+				case '0': 
+					choice_source = "";
+					choice_source += "yandexweather";
+				break;
+
+				case '1':
+					choice_source = "";
+					choice_source +="accuweather";
+				break;
+				
+				case '2':
+					choice_source = "";
+					choice += "rumeteo";
+				break;
+
+				case '3':
+					choice_source = "";
+					choice_source += "msnweather";
+				break;
+				default:
+			}
+
+			switch (selected_city) {
 				case '0': 
 					choice = "";
 					choice += "moscow";
@@ -72,30 +100,48 @@
 					choice = "";
 					choice += "sochi";
 				break;
-				default:
-		
+				default:	
 			}
+			
 			var xmlhttp = new XMLHttpRequest();
 			var txt = "";
 
 			xmlhttp.onreadystatechange = function() {
 			    if (this.readyState == 4 && this.status == 200) {
 			        myObj = JSON.parse(this.responseText);
-			            txt += "<h2 align = 'center' class = 'weatherCity'>Weather for " + choice + "</h2>"; 
-			            txt += "<table id = 'result' border='1'>"
+			            var count = 0, count2 = 0;
+			            var i;
+			            for (x in myObj) {
+			                if (myObj.hasOwnProperty(x)) {
+			                    count++;
+			                }
+			            }
+			            txt += "<h1 class = 'weatherCity'>Результат работы алгоритма. Результат:</h1>"
+			            txt += "<table id = 'result_best'>"
+			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>";
+			            txt += "<tr><th>" + myObj[count-1].source + "</th>" + "<th>" + myObj[count-1].temp + "</th>" + "<th>" + myObj[count-1].humidity + "</th>" + "<th>"+ myObj[count-1].windSpeed + "</th></tr>";
+			            txt += "</table>";
+			            txt += "<h2 align = 'center' class = 'weatherCity'>Погода для " + choice + "</h2>"; 
+			            txt += "<table id = 'result'>"
 			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>"
 			            for (x in myObj) {
-			                txt += "<tr><th>" + myObj[x].source + "</th>" + "<th>" + myObj[x].temp + "</th>" + "<th>" + myObj[x].humidity + "</th>" + "<th>"+ myObj[x].windSpeed + "</th></tr>";
+			                count2++;
+			                if (count != count2) {
+			                	txt += "<tr><th>" + myObj[x].source + "</th>" + "<th>" + myObj[x].temp + "</th>" + "<th>" + myObj[x].humidity + "</th>" + "<th>"+ myObj[x].windSpeed + "</th></tr>";	
+			                } 
 			            }
 			            txt += "</table>"
+			            $("#result_best","result").css({"margin": "0 auto"});
+			            $("th").css({"padding":"4em"});
 			            document.getElementById("weatherList").innerHTML = txt;
 			    }
 			};
-			xmlhttp.open("GET", "http://localhost:8080/weather/"+choice+"", true);
+			xmlhttp.open("GET", "http://localhost:8080/weather/"+choice+"?trust=" + choice_source +"", true);
 			xmlhttp.send();	
 		});
 
 		$("#clear").click(function() {
+			$("#result_best").remove();
 			$("#result").remove();
 			$(".weatherCity").remove();
 		})
