@@ -10,14 +10,18 @@ h1, h2, h3 {
 
 input, button {
 	background-color: #f8f8f8;
-	border-radius: 2em;
-	padding-left: 2em;	
+	border-radius: 2em;	
 	border: 0;
 	width: 10em;
 	height: 3em;
 	color: black;
-	margin-right: 2em;
 	box-shadow: 0 0 1em black;
+}
+
+button {
+	padding-left: 2em;
+	padding-right: 2em;
+	margin-right: 1em;
 }
 
 button:focus {
@@ -56,24 +60,8 @@ body {
 	margin-top: 3em;
 }
 
-button {
-	background-color: white;
-	border: 0;
-	color: black;
-	padding: 0.5em;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 1em;
-	cursor: pointer;
-	border-radius: 2em;
-}
 
 button:hover {
 	transition: 0.8s;
 	background-color: lightgrey;
-}
-
-#result_best, #result {
-	margin: 0 auto;
 }

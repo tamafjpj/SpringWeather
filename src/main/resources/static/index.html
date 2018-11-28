@@ -124,12 +124,12 @@
 			                }
 			            }
 			            txt += "<h1 class = 'weatherCity'>Результат работы алгоритма. Результат:</h1>"
-			            txt += "<table id = 'result_best'>"
+			            txt += "<table id = 'result_best' align = 'center'>"
 			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>";
 			            txt += "<tr><th>" + myObj[count-1].source + "</th>" + "<th>" + myObj[count-1].temp + "</th>" + "<th>" + myObj[count-1].humidity + "</th>" + "<th>"+ myObj[count-1].windSpeed + "</th></tr>";
 			            txt += "</table>";
 			            txt += "<h2 align = 'center' class = 'weatherCity'>Погода для " + choice + "</h2>"; 
-			            txt += "<table id = 'result'>"
+			            txt += "<table id = 'result' align = 'center'>"
 			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>"
 			            for (x in myObj) {
 			                count2++;
@@ -137,9 +137,7 @@
 			                	txt += "<tr><th>" + myObj[x].source + "</th>" + "<th>" + myObj[x].temp + "</th>" + "<th>" + myObj[x].humidity + "</th>" + "<th>"+ myObj[x].windSpeed + "</th></tr>";	
 			                } 
 			            }
-			            txt += "</table>"
-			            $("#result_best","result").css({"margin": "0 auto"});
-			            $("th").css({"padding":"4em"});
+			            txt += "</table>";
 			            document.getElementById("weatherList").innerHTML = txt;
 			    }
 			};
