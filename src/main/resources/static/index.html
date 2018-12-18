@@ -7,9 +7,6 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-			<video autoplay muted loop id="myVideo">
-  				<source src="background.mp4" type="video/mp4">
-			</video>
 			<h1>SpringWeather</h1>
 			<h2>Выберите город для анализа</h2>
 			<div class = "custom-select">
@@ -123,7 +120,7 @@
 			                    count++;
 			                }
 			            }
-			            txt += "<h1 class = 'weatherCity'>Результат работы алгоритма. Результат:</h1>"
+			            txt += "<h1 class = 'weatherCity'>Результат работы алгоритма:</h1>"
 			            txt += "<table id = 'result_best' align = 'center'>"
 			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>";
 			            txt += "<tr><th>" + myObj[count-1].source + "</th>" + "<th>" + myObj[count-1].temp + "</th>" + "<th>" + myObj[count-1].humidity + "</th>" + "<th>"+ myObj[count-1].windSpeed + "</th></tr>";

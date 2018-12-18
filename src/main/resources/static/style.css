@@ -4,6 +4,12 @@
 	font-family: 'Lato', sans-serif;
 	color: white;
 }
+
+body {
+	background-image: url(wallpaper.jpg);
+	background-size: 100%;
+	background-repeat-y: no-repeat;
+}
 h1, h2, h3 {
 	text-shadow: 0 0 1em black;
 }
@@ -39,16 +45,6 @@ input:focus {
 	outline: 0;
 }
 
-video {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	min-width: 100%;
-	min-height: 100%;
-	z-index: -9999;
-	filter: blur: 4px;
-	-webkit-filter: blur(4px);
-}
 body {
 	background-color: grey;
 	display: flex;
