@@ -7,6 +7,7 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
+			<div class = "rectangle">
 			<h1>SpringWeather</h1>
 			<h2>Выберите город для анализа</h2>
 			<div class = "custom-select">
@@ -17,9 +18,7 @@
 					<option value = "3">Казань</option>
 					<option value = "4">Сочи</option>
 				</select>
-			</div>
-			<h2>Выберите частоту обновления (минуты)</h2>
-			<input align="center"></input>
+			
 			<h2>Выберите достоверный источник</h2>
 			<div class = "custom-select2">
 				<select>
@@ -33,8 +32,10 @@
 				<button id = "clear">Очистить ввод</button>
 				<button id ="complete">Выполнить запрос</button>
 			</div>
+			</div>
 			<br>
 			<div id = "weatherList"></div>
+		</div>
 	</body>	
 
 	<script>
@@ -122,12 +123,12 @@
 			            }
 			            txt += "<h1 class = 'weatherCity'>Результат работы алгоритма:</h1>"
 			            txt += "<table id = 'result_best' align = 'center'>"
-			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>";
+			            txt += "<thead><tr><th>Источник</th><th>Температура</th><th>Влажность</th><th>Скорость ветра</th></tr></thead>";
 			            txt += "<tr><th>" + myObj[count-1].source + "</th>" + "<th>" + myObj[count-1].temp + "</th>" + "<th>" + myObj[count-1].humidity + "</th>" + "<th>"+ myObj[count-1].windSpeed + "</th></tr>";
 			            txt += "</table>";
 			            txt += "<h2 align = 'center' class = 'weatherCity'>Погода для " + choice + "</h2>"; 
 			            txt += "<table id = 'result' align = 'center'>"
-			            txt += "<thead><tr><th>Source</th><th>Temperature</th><th>Humidity</th><th>windSpeed</th></tr></thead>"
+			            txt += "<thead><tr><th>Источник</th><th>Температура</th><th>Влажность</th><th>Скорость ветра</th></tr></thead>"
 			            for (x in myObj) {
 			                count2++;
 			                if (count != count2) {
