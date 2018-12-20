@@ -44,4 +44,14 @@ public class Weather {
     public void setWindSpeed(float windSpeed) {
         this.windSpeed = windSpeed;
     }
+
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "source='" + source + '\'' +
+                ", temp=" + temp +
+                ", humidity=" + humidity +
+                ", windSpeed=" + windSpeed +
+                '}';
+    }
 }

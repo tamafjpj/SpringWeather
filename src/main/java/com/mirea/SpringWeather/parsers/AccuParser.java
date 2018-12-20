@@ -1,4 +1,4 @@
-package com.mirea.SpringWeather;
+package com.mirea.SpringWeather.parsers;
 
 import model.Weather;
 import org.jsoup.Jsoup;

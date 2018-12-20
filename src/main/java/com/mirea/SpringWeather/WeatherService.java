@@ -1,5 +1,9 @@
 package com.mirea.SpringWeather;
 
+import com.mirea.SpringWeather.parsers.AccuParser;
+import com.mirea.SpringWeather.parsers.MsnParser;
+import com.mirea.SpringWeather.parsers.RumeteoParser;
+import com.mirea.SpringWeather.parsers.YandexParser;
 import model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -115,7 +119,8 @@ public class WeatherService {
         }
         if (res.size() > 1) {
             for (Weather i : res) {
-                if (i.equals(trust)) return i;
+                //System.out.println(i.toString());
+                if (i.getSource().equalsIgnoreCase(trust.getSource())) return i;
             }
             return res.get(0);
         }

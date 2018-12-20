@@ -1,5 +1,6 @@
-package com.mirea.SpringWeather;
+package com.mirea.SpringWeather.parsers;
 
+import com.mirea.SpringWeather.parsers.HtmlParser;
 import model.Weather;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

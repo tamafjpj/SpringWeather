@@ -1,5 +1,6 @@
-package com.mirea.SpringWeather;
+package com.mirea.SpringWeather.parsers;
 
+import com.mirea.SpringWeather.parsers.HtmlParser;
 import model.Weather;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -62,7 +63,7 @@ public class MsnParser implements HtmlParser,Runnable {
 
     @Override
     public float findWindSpeed() {
-        String s = "0";
+        String s = "";
         int k = 1;
         Elements content = doc.getElementsByClass("weather-info");
 
@@ -70,9 +71,9 @@ public class MsnParser implements HtmlParser,Runnable {
             k++;
             if (k == 2) {
                 s = i.text();
-                s = s.substring(s.indexOf("Ветер"), s.indexOf("/")-1);
-                s = s.substring(s.indexOf(" ")+1);
-                s = s.substring(s.indexOf(" "));
+                s = s.substring(s.indexOf("Ветер"), s.indexOf("/")-2);
+                s = s.substring(s.indexOf(" ") + 1);
+                s = s.substring(s.indexOf(" ") + 1);
             }
         }
         s = s.replaceAll(",", ".");
