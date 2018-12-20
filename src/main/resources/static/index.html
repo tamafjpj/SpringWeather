@@ -11,7 +11,7 @@
 			<h1>SpringWeather</h1>
 			<h2>Выберите город для анализа</h2>
 			<div class = "custom-select">
-				<select>
+				<select class="select_city">
 					<option value = "0">Москва</option>
 					<option value = "1">Владивосток</option>
 					<option value = "2">Санкт-Петербург</option>
@@ -21,7 +21,7 @@
 			
 			<h2>Выберите достоверный источник</h2>
 			<div class = "custom-select2">
-				<select>
+				<select class = "select_source">
 					<option value = "0">YandexWeather</option>
 					<option value = "1">AccuWeather</option>
 					<option value = "2">RuMeteo</option>
@@ -41,11 +41,13 @@
 	<script>
 		var selected_city = 0;
 		var selected_source = 0;
-		$(".custom-select select").change(function () {
+		$(".select_city").change(function () {
 			selected_city = $(this).children("option:selected").val();
+			console.log(selected_city);
 		});
-		$(".custom-select2 select").change(function () {
+		$(".select_source").change(function () {
 			selected_source = $(this).children("option:selected").val();
+			console.log(selected_source);
 		});
 
 
